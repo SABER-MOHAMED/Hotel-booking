@@ -13,15 +13,17 @@
 <div class="container mt-5">
     <div class="row justify-content-center" >
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header"><a href="index.php">
+                        <a href="index.php">
                             <span class="btn btn-info mt-1">
                             <i class="fa fa-angle-left"></i> Retour</span>
                         </a>
+            <div class="card mt-2">
+                <div class="card-header">
+                        
                         <h5 class="text-center">Tous Les Chambres  Ajoutés</h5>
                 </div>
     <!-- Start dashboard Section --->
-                    <table class="table table-hover mt-4 text-center">
+                    <table class="table table-hover mt-4 text-center ">
                         <tr class="text-center">
                             <th>Code De Chambre</th>
                             <th>Nombre De Lit</th>
@@ -54,7 +56,7 @@
                 </div>
                         
                         <a href="ajouter.php">
-                            <span class="btn btn-info mt-2 float-right">
+                            <span class="btn btn-primary mt-2 float-right">
                             <i class="fa fa-plus"></i> Ajouter</span>
                         </a>
     </div>

@@ -14,28 +14,10 @@
     <!-- Start Navbar Section --->
     <nav class="navbar navbar-expand-lg navbar-light bg-info">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">Hotel</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="ajouter.php">Ajouter</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="modifier.php">Modifier</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="supprimer.php">Supprimer</a>
-            </li>
-            </ul>
-        </div>
+        <a class="navbar-brand" href="index.php">Gestion Des Chambres</a>
+        
     </div>
     </nav>
     <!-- End Navbar Section --->
 </head>
-<body>
+<body style="background-color: #e7e7e7;">

@@ -4,30 +4,41 @@
     <!-- Start FORM modify Section --->
     <div class="container mt-5">
     <div class="row justify-content-center" >
+                    <a href="index.php">
+                        <span class="btn btn-info mt-1">
+                        <i class="fa fa-angle-left"></i> Retour</span>
+                    </a>
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header"> 
-                        <h3 class="text-center my-2">Modifier La Chambre Numéro <a class="link-primary"  href="index.php" ><?= $_GET['id'] ?></a></h3>
+                        <h3 class="text-center my-2"><i class="fa fa-edit"></i> Modifier Une Chambre</h3>
             <div class="card-body"> 
                 <form class="form-horizontal" action="" method="POST">
                     <table class="table table-hover mt-4 text-center">
-                    <tr class="text-center">
-                        <th>
-                            <label >Nombre De Lit :</label>
-                        </th>
-                        <th>
-                            <input type="number" name="nbrlit" class="form-control" autocomplete="off" placeholder="Entrer Le Nombre De Lit" required="required" />
-                            <input value="1" type="hidden" name="id" />
-                        </th>
-                    </tr>
-                    <tr  class="text-center">
-                        <th>
-                            <label > Prix :</label>
-                        </th>
-                        <th>
-                            <input type="text" name="prix" class="form-control" autocomplete="off" placeholder="Entrer Le Prix En Dirham" required="required" />
-                        </th>
-                    </tr>
+                        <tr class="text-center">
+                            <th>
+                                <label >Code De Chambre :</label>
+                            </th>
+                            <th>
+                                <input type="number" name="code" class="form-control" autocomplete="off" placeholder="Entrer Le Code De Chambre" required="required" />
+                            </th>
+                        </tr>
+                        <tr class="text-center">
+                            <th>
+                                <label >Nombre De Lit :</label>
+                            </th>
+                            <th>
+                                <input type="number" name="nbrlit" class="form-control" autocomplete="off" placeholder="Entrer Le Nombre De Lit" required="required" />
+                            </th>
+                        </tr>
+                        <tr  class="text-center">
+                            <th>
+                                <label > Prix :</label>
+                            </th>
+                            <th>
+                                <input type="text" name="prix" class="form-control" autocomplete="off" placeholder="Entrer Le Prix En Dirham" required="required" />
+                            </th>
+                        </tr>
                     </table>
                     </div>
                     </div>
@@ -57,18 +68,32 @@
 
             $nbr_lit = $_POST['nbrlit'] ;
             $prix = $_POST['prix'];      
-            $id = $_POST['id'];          
+            $code = $_POST['code'];          
 
-            $stmt =  $con->prepare("UPDATE chambre SET nombre_lit = ? , prix = ? WHERE code_ch = ? ") ;
-            
-            $stmt->execute(array($nbr_lit ,$prix, $id));
+             // check if this chambre is set or not
+            $stmt =  $con->prepare("SELECT code_ch FROM chambre WHERE code_ch = ? LIMIT 1 ") ;
+            $stmt->execute(array($code));
+            $count = count($stmt->fetchAll());
 
-            //echo success message 
-            $themsg = '<div class="alert alert-success mt-4">' . $stmt->rowCount() . ' Record Updated </div>';
+            if ($count == 1 ) {
+                $stmt =  $con->prepare("UPDATE chambre SET code_ch = ? , nombre_lit = ? , prix = ? WHERE code_ch = ? ") ;
+                
+                $stmt->execute(array($code,$nbr_lit ,$prix, $code));
 
-            echo $themsg;
-            $url = isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== '' ? $_SERVER['HTTP_REFERER'] : $url = 'index.php';      
-    
+                //echo success message 
+                $themsg = '<div class="alert alert-success mt-4">' . $stmt->rowCount() . ' Record Updated </div>';
+
+                echo $themsg;
+                $url = isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== '' ? $_SERVER['HTTP_REFERER'] : $url = 'index.php';      
+            } else {
+                //echo danger message 
+                $themsg = '<div class="alert alert-danger mt-4">Cette Chambre n\'existe pas</div>';
+
+                echo $themsg;
+                $url = isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== '' ? $_SERVER['HTTP_REFERER'] : $url = 'index.php';      
+        
+                header("refresh:1;url=$url");
+            }
             header("refresh:1;url=$url");
         }
     
